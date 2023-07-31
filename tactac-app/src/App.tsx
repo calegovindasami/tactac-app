@@ -1,6 +1,6 @@
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-import Button from "@mui/material/Button";
 import { blue } from "@mui/material/colors";
+import NavBar from "./navigation/navbar";
 import "./App.css";
 
 function App() {
@@ -17,7 +17,7 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Button variant="contained">Login</Button>
+      <NavBar></NavBar>
     </ThemeProvider>
   );
 }
