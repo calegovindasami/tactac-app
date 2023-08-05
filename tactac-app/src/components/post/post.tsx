@@ -10,7 +10,6 @@ import Typography from "@mui/material/Typography";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 
 import { Random } from "unsplash-js/dist/methods/photos/types";
-import "./post.css";
 import {
   Avatar,
   CardActionArea,
@@ -27,9 +26,8 @@ const Post = (post: Random) => {
 
   function likePhoto() {
     setLikes(isLiked === true ? likes - 1 : likes + 1);
-
     setIsLiked(!isLiked);
-    document.querySelector(`.${post.id}`)?.classList.toggle("is-liked");
+    document.querySelector(`.h${post.id}`)?.classList.toggle("is-liked");
   }
 
   return (
@@ -82,11 +80,11 @@ const Post = (post: Random) => {
           </CardMedia>
         </Box>
         <CardActions>
-          <Button onClick={likePhoto} sx={{ color: "black" }}>
+          <Button onClick={likePhoto} sx={{ color: "gray" }}>
             {likes}
             <FavoriteIcon
-              className={post.id}
-              sx={{ color: "gray", marginLeft: "8px" }}
+              className={"h" + post.id}
+              sx={{ marginLeft: "8px" }}
             />
           </Button>
 

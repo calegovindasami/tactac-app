@@ -15,7 +15,7 @@ export default function Feed() {
     const getPhotoAsync = async () => {
       unsplash.photos
         .getRandom({
-          count: 10,
+          count: 4,
           orientation: "landscape",
         })
         .then((result) => {
@@ -36,6 +36,8 @@ export default function Feed() {
       justifyContent="center"
       alignItems="center"
       spacing={2}
+      minHeight={"50%"}
+      overflow={"auto"}
       marginTop={8}
     >
       {photos?.map((photo) => (
