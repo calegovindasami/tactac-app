@@ -1,4 +1,7 @@
-import { red } from "@mui/material/colors";
+import { useState } from "react";
+import React from "react";
+import red from "@mui/material/colors/red";
+import grey from "@mui/material/colors/grey";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
@@ -8,78 +11,96 @@ import Chip from "@mui/material/Chip";
 import ShareIcon from "@mui/icons-material/Share";
 import Typography from "@mui/material/Typography";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import IPost from "../../interfaces/post/IPost";
+import { createApi } from "unsplash-js";
+import { Random } from "unsplash-js/dist/methods/photos/types";
+import "./post.css";
 import {
   Avatar,
   CardActionArea,
   CardActions,
   CardHeader,
   IconButton,
+  colors,
 } from "@mui/material";
 
+const Post = (post: Random) => {
+  const user = post.user;
+  const links = post.urls;
+  const [likes, setLikes] = useState<number>(post.likes);
+  const [isLiked, setIsLiked] = useState<boolean>(false);
 
+  function likePhoto() {
+    setLikes(isLiked === true ? likes - 1 : likes + 1);
+    console.log(isLiked);
+    setIsLiked(!isLiked);
+    document.querySelector(`.${post.id}`)?.classList.toggle("is-liked");
+    console.log(document.querySelector("favoriteIcon"));
+  }
 
-const Post = (props: IPost) => {
   return (
-    <Card sx={{ width: "800px" }}>
-    <CardActionArea sx={{ cursor: "default" }} disableTouchRipple={true}>
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "flex-start",
-          justifyContent: "flex-start",
-        }}
-      >
-        <CardContent>
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "start",
-            }}
-          >
-            <CardHeader
-              avatar={
-                <Avatar>
-                  <img src={props.avatar_url} height="45"></img>
-                </Avatar>
-              }
-              titleTypographyProps={{
-                fontFamily: "inherit",
-                color: "red[500]",
-                variant: "h6",
-                align: "left",
+    <Card sx={{ width: "800px", padding: "16px" }}>
+      <CardActionArea sx={{ cursor: "default" }} disableTouchRipple={true}>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "flex-start",
+            justifyContent: "flex-start",
+          }}
+        >
+          <CardContent>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "start",
               }}
-              title={<div id="title">{props.username}</div>}
-              subheader={
-                <span>
-                  <Chip size="small" label={props.tag} />
-                </span>
-              }
+            >
+              <CardHeader
+                avatar={
+                  <Avatar>
+                    <img src={user.profile_image.small} height="45"></img>
+                  </Avatar>
+                }
+                titleTypographyProps={{
+                  fontFamily: "inherit",
+                  color: "red[500]",
+                  variant: "h6",
+                  align: "left",
+                }}
+                title={<div id="title">{user.instagram_username}</div>}
+                subheader={
+                  <span>
+                    <Chip size="small" label={user.location} />
+                  </span>
+                }
+              />
+            </Box>
+            <Typography variant="body1" textAlign="left">
+              {post.description}
+            </Typography>
+          </CardContent>
+        </Box>
+
+        <Box>
+          <CardMedia>
+            <img src={links.full} width={800} />
+          </CardMedia>
+        </Box>
+        <CardActions>
+          <Button onClick={likePhoto} sx={{ color: "black" }}>
+            {likes}
+            <FavoriteIcon
+              className={post.id}
+              sx={{ color: "gray", marginLeft: "8px" }}
             />
-          </Box>
-          <Typography variant="body1" textAlign="left">
-            {props.description}
-          </Typography>
-        </CardContent>
-      </Box>
+          </Button>
 
-      <Box>
-        <CardMedia>
-          <img src="./react.svg" height={300} />
-        </CardMedia>
-      </Box>
-      <CardActions>
-        <Button>
-          <FavoriteIcon sx={{ color: red[500] }} />
-        </Button>
-
-        <IconButton size="large">
-          <ShareIcon />
-        </IconButton>
-      </CardActions>
-    </CardActionArea>
-  </Card>
-  )
-}
-export default Post
+          <IconButton size="large">
+            <ShareIcon />
+          </IconButton>
+        </CardActions>
+      </CardActionArea>
+    </Card>
+  );
+};
+export default Post;

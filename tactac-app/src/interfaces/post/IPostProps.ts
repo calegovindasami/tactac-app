@@ -1,5 +1,5 @@
 import IPost from "./IPost";
 
-export default interface IPostProps{
-    Posts: IPost[]
+export default interface IPostProps {
+  posts: IPost[];
 }

@@ -11,15 +11,6 @@ export default function NavBar() {
     <Box sx={{ flexGrow: 1, paddingBottom: '32px' }}>
       <AppBar>
         <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton>
           <Typography
             variant="h4"
             component="div"
@@ -27,8 +18,11 @@ export default function NavBar() {
           >
             TacTac
           </Typography>
-          <Button color="inherit" sx={{ fontSize: "16px" }}>
+          <Button id="btnLogin" color="inherit" sx={{ fontSize: "16px" }}>
             Login
+          </Button>
+          <Button id="btnRegister" color="inherit" sx={{ fontSize: "16px" }}>
+            Register
           </Button>
         </Toolbar>
       </AppBar>
