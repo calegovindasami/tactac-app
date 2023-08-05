@@ -21,8 +21,6 @@ export default function Feed() {
         .then((result) => {
           if (result.type === "success") {
             setPhotos(result.response as Random[]);
-            console.log(result.type);
-            console.log(photos);
           }
         })
         .catch((error) => {

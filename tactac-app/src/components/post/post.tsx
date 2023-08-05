@@ -1,7 +1,4 @@
 import { useState } from "react";
-import React from "react";
-import red from "@mui/material/colors/red";
-import grey from "@mui/material/colors/grey";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
@@ -11,7 +8,7 @@ import Chip from "@mui/material/Chip";
 import ShareIcon from "@mui/icons-material/Share";
 import Typography from "@mui/material/Typography";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import { createApi } from "unsplash-js";
+
 import { Random } from "unsplash-js/dist/methods/photos/types";
 import "./post.css";
 import {
@@ -20,7 +17,6 @@ import {
   CardActions,
   CardHeader,
   IconButton,
-  colors,
 } from "@mui/material";
 
 const Post = (post: Random) => {
@@ -31,10 +27,9 @@ const Post = (post: Random) => {
 
   function likePhoto() {
     setLikes(isLiked === true ? likes - 1 : likes + 1);
-    console.log(isLiked);
+
     setIsLiked(!isLiked);
     document.querySelector(`.${post.id}`)?.classList.toggle("is-liked");
-    console.log(document.querySelector("favoriteIcon"));
   }
 
   return (
