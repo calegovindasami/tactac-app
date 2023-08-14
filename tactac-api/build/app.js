@@ -26,14 +26,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const express_1 = __importDefault(require("express"));
 const dotenv = __importStar(require("dotenv"));
-const app = (0, express_1.default)();
+const https_1 = __importDefault(require("https"));
+const routes_1 = __importDefault(require("./routes"));
+const fs_1 = __importDefault(require("fs"));
 dotenv.config();
 const PORT = process.env.PORT;
-app.get('/', (request, response) => {
-    response.send('<h1>Hello World</h1>');
-});
-app.listen(PORT, () => {
-    console.log();
-});
+const options = {
+    key: fs_1.default.readFileSync(process.env.SSL_KEY),
+    cert: fs_1.default.readFileSync(process.env.SSL_CERT),
+};
+https_1.default.createServer(options, routes_1.default).listen(PORT);

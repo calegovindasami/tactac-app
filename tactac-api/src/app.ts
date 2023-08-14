@@ -1,15 +1,14 @@
-import express from 'express'
-import * as dotenv from 'dotenv'
+import * as dotenv from "dotenv";
+import https from "https";
+import app from "./routes";
+import fs from "fs";
 
-const app = express();
 dotenv.config();
 
 const PORT = process.env.PORT;
+const options = {
+  key: fs.readFileSync(process.env.SSL_KEY!),
+  cert: fs.readFileSync(process.env.SSL_CERT!),
+};
 
-app.get('/', (request, response) => {
-    response.send('<h1>Hello World</h1>');
-});
-
-app.listen(PORT, () => {
-    console.log()
-})
+https.createServer(options, app).listen(PORT);
