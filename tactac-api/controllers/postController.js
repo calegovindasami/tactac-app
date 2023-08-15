@@ -12,4 +12,9 @@ const createPost = async (req, res) => {
   res.sendStatus(200);
 };
 
-module.exports = { getPosts, createPost };
+const updatePost = async (req, res) => {
+  await service.updatePost(req.params.id, req.body);
+  res.sendStatus(200);
+};
+
+module.exports = { getPosts, createPost, updatePost };

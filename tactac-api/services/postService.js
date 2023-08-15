@@ -15,9 +15,13 @@ const createPost = async (model) => {
   await post.save();
 };
 
+const updatePost = async (_id, model) => {
+  const post = await Post.findOneAndUpdate({ _id: _id }, model);
+};
+
 const deletePost = async (id) => {
   const post = Post.deleteOne({ id: id });
   return post;
 };
 
-module.exports = { getPostsById, getPosts, createPost, deletePost };
+module.exports = { getPostsById, getPosts, createPost, updatePost, deletePost };
