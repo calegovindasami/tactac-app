@@ -13,10 +13,12 @@ const getPosts = async () => {
 const createPost = async (model) => {
   const post = new Post({ ...model });
   await post.save();
+  return post;
 };
 
 const updatePost = async (_id, model) => {
   const post = await Post.findOneAndUpdate({ _id: _id }, model);
+  return post;
 };
 
 const deletePost = async (id) => {
